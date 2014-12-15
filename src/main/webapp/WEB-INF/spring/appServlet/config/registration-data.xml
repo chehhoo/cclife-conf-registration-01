@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xsi:schemaLocation="
+                    http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans.xsd
+                    http://www.springframework.org/schema/aop
+                    http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+   
+
+    <bean id="directJdbcDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${databaseDriverClassName}"/>
+        <property name="url" value="${databaseUrl}"/>
+        <property name="username" value="${databaseUserId}"/>
+        <property name="password" value="${databasePassword}"/>
+    </bean>
+    
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource">
+            <ref bean="directJdbcDataSource"/>
+        </property>
+    </bean>
+
+    <bean id="JdbcRegistrationDao"
+        class="ws.cccm.registration.dao.JdbcRegistrationDaoImpl">
+        <property name="jdbcTemplate">
+            <ref bean="jdbcTemplate"/>
+        </property>
+        <property name="INSERT_SQL">
+            <value>INSERT INTO registration (RegistrationID,age,breakfast1,breakfast2,breakfast3,breakfast4,cellPhone,chineseName,dinner1,dinner2,dinner3,dinner4,email,firstName,formID,gender,homeCity,homePhone,homeState,homeStreetAddress,homeZipCode,lastName,lunch1,lunch2,lunch3,lunch4,personID,registrationDate,remarks,status,language,churchID,faith,faithYear,seminar) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)</value>
+        </property>
+        <property name="SELECT_SQL">
+            <value>select * from MYACCT_MOP_PREF where BAN = ?</value>
+        </property>
+    </bean>
+<!--
+    <bean id="jdbcRegistrationService" class="ws.cccm.registration.service.RegistrationServiceImpl">
+        <property name="registrationDao">
+            <ref bean="registrationDao"/>
+        </property>
+        <property name="paymentDao">
+            <ref bean="paymentDao"/>
+        </property>
+    </bean>
+-->
+
+    <!-- =================================================================== -->
+    <!-- Mail: Sender and Velocity configuration                             -->
+    <!-- =================================================================== -->
+    <bean id="mailEngine" class="ws.cccm.application.service.MailEngine">
+        <property name="mailSender" ref="mailSender"/>
+        <property name="velocityEngine" ref="velocityEngine"/>
+        <property name="from" value="${mail.default.from}"/>
+    </bean>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${mail.host}"/>
+        <property name="port" value="${mail.port}"/>
+        <property name="defaultEncoding" value="UTF-8"/> 
+        <!-- Uncomment if you need to authenticate with your SMTP Server -->
+        <property name="username" value="${mail.username}"/>
+        <property name="password" value="${mail.password}"/>
+        <property name="javaMailProperties">
+            <value>
+                mail.smtp.auth=true
+                mail.mime.charset=UTF-8
+            </value>
+        </property>
+    </bean>
+
+    <!-- Configure Velocity for sending e-mail -->
+    <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+        <property name="velocityProperties">
+            <props>
+                <prop key="resource.loader">class</prop>
+                <prop key="class.resource.loader.class">
+                    org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+                </prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage" scope="prototype">
+        <property name="from" value="${mail.default.from}"/>
+    </bean>
+
+</beans>
