@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow xmlns="http://www.springframework.org/schema/webflow"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="
 		http://www.springframework.org/schema/webflow 
 		http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
-	<view-state id="step1" view="embeddedFlow/step1">
-		<transition on="next" to="step2"/> 
-		<transition on="cancel" to="cancel"/>
-	</view-state>
+    <var class="ws.cccm.application.model.Form"
+         name="form" />
 
-	<view-state id="step2" view="embeddedFlow/step2">
-		<transition on="previous" to="step1"/>
-		<transition on="finish" to="success"/>
-		<transition on="cancel" to="cancel"/>
-	</view-state>
+    <on-start>
+        <evaluate expression="registrationService.initializeForm()" result="form" />
+    </on-start>
+    
+    <view-state id="step1" model="form" view="cccc/step1">
+        <transition on="next" to="step2"/> 
+        <transition on="cancel" to="cancel"/>
+    </view-state>
 
-	<end-state id="success" view="embeddedFlow/success"/>
+    <view-state id="step2" model="form" view="cccc/step2">
+        <transition on="previous" to="step1"/>
+        <transition on="finish" to="success"/>
+        <transition on="cancel" to="cancel"/>
+    </view-state>
 
-	<end-state id="cancel" view="embeddedFlow/cancel"/>
+    <end-state id="success" view="cccc/success"/>
+
+    <end-state id="cancel" view="cccc/cancel"/>
 
 </flow>
