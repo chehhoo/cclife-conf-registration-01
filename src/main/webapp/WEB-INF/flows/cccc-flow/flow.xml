@@ -7,7 +7,9 @@
 
     <var class="ws.cccm.application.model.Form"
          name="form" />
-
+    <var class="ws.cccm.application.model.Paypal"
+         name="payObj" />
+    
     <on-start>
         <evaluate expression="registrationService.initializeForm()" result="form" />
     </on-start>
@@ -16,15 +18,40 @@
         <transition on="next" to="step2"/> 
         <transition on="cancel" to="cancel"/>
     </view-state>
-
+    
     <view-state id="step2" model="form" view="cccc/step2">
         <transition on="previous" to="step1"/>
-        <transition on="finish" to="success"/>
+        <transition on="next" to="step3"/> 
         <transition on="cancel" to="cancel"/>
     </view-state>
 
-    <end-state id="success" view="cccc/success"/>
+    <view-state id="step3" model="form" view="cccc/step3">
+        <transition on="previous" to="step2"/>
+        <transition on="next" to="review"/>
+        <transition on="cancel" to="cancel"/>
+    </view-state>
+    
+    <view-state id="review" model="form" view="cccc/review">
+        <transition on="previous" to="step3"/>
+        <transition on="next" to="payment"/>
+        <transition on="cancel" to="cancel"/>
+    </view-state>
 
+    <decision-state id="payment">
+        <if test="form.paymentMethod == form.paymentMethod.PERSONAL_CHECK" then="confirmAndPayByCheck"/>
+        <if test="form.paymentMethod == form.paymentMethod.CREDIT_CARD" then="prepareCredit"/>
+    </decision-state>
+
+    <action-state id="prepareCredit">
+        <evaluate expression="registrationService.createPaypalRequest(form)"
+                  result="payObj"/>
+        <transition to="confirmAndPayByCredit" />
+    </action-state>
+
+    <end-state id="confirmAndPayByCheck" view="cccc/confirmAndPayByCheck" />
+    <end-state id="confirmAndPayByCredit" view="cccc/confirmAndPayByCredit" />
+    
+    <end-state id="success" view="cccc/success"/>
     <end-state id="cancel" view="cccc/cancel"/>
 
 </flow>

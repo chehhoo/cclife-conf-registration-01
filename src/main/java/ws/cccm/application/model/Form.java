@@ -61,6 +61,7 @@ public class Form extends BaseObject {
     private String homeCity;
     private String homeState;
     private String homeZipCode;
+    private String homeCountry;
     private String homePhone;
     private String email;
     private String emailConfirm;
@@ -4191,6 +4192,20 @@ public class Form extends BaseObject {
      */
     public void setEmailConfirm(String emailConfirm) {
         this.emailConfirm = emailConfirm;
+    }
+
+    /**
+     * @return the homeCountry
+     */
+    public String getHomeCountry() {
+        return homeCountry;
+    }
+
+    /**
+     * @param homeCountry the homeCountry to set
+     */
+    public void setHomeCountry(String homeCountry) {
+        this.homeCountry = homeCountry;
     }
 
 }

@@ -571,35 +571,35 @@ public class JpaRegistrationServiceImpl implements RegistrationService {
         Paypal p = new Paypal();
 
         p.setCmd("_ext-enter");
-        p.setRedirect_cmd("_xclick");
-        p.setBusiness("Registration@cccm.ws");
-//        p.setBusiness("clhoo_1288811245_biz@msn.com");
-        p.setItem_name("CCCC/Grace 2014");
-        p.setItem_number(String.valueOf(f.getFormID().longValue()));
-        p.setAmount(String.valueOf(f.getGrandTotal().doubleValue()));
-        p.setCustom(String.valueOf(f.getGrandTotal().doubleValue()));
-        p.setNo_shipping("0");
-        p.setNo_note("1");
-        p.setCurrency_code("USD");
-        p.setLc("US");
-        p.setBn("PP-BuyNowBF");
-//        p.setReturn("http://localhost:9090/Registration/confirm.htm");
-        p.setReturn("http://cccm.biz:8084/registration/confirm.htm");
-        p.setNotify_url("http://cccm.biz:8084/registration/instantPaymentNotification.htm");
-        p.setRm("2");
-        p.setEmail(f.getEmail());
-        p.setFirst_name("");
-        p.setLast_name("");
-        p.setAddress1(f.getHomeStreetAddress());
-        p.setAddress2("");
-        p.setCity(f.getHomeCity());
-        p.setState(f.getHomeState());
-        p.setZip(f.getHomeZipCode());
-
-        if (f.getEventID().compareTo(201403) == 0) {
-            p.setReturn("http://cccm.biz:8084/registration/confirmGrace.htm");
-        }
-        logger.info("createPaypalRequest exiting");
+//        p.setRedirect_cmd("_xclick");
+//        p.setBusiness("Registration@cccm.ws");
+////        p.setBusiness("clhoo_1288811245_biz@msn.com");
+        p.setItem_name("Toronto Gospel Conference 2015");
+//        p.setItem_number(String.valueOf(f.getFormID().longValue()));
+//        p.setAmount(String.valueOf(f.getGrandTotal().doubleValue()));
+//        p.setCustom(String.valueOf(f.getGrandTotal().doubleValue()));
+//        p.setNo_shipping("0");
+//        p.setNo_note("1");
+//        p.setCurrency_code("USD");
+//        p.setLc("US");
+//        p.setBn("PP-BuyNowBF");
+////        p.setReturn("http://localhost:9090/Registration/confirm.htm");
+//        p.setReturn("http://cccm.biz:8084/registration/confirm.htm");
+//        p.setNotify_url("http://cccm.biz:8084/registration/instantPaymentNotification.htm");
+//        p.setRm("2");
+//        p.setEmail(f.getEmail());
+//        p.setFirst_name("");
+//        p.setLast_name("");
+//        p.setAddress1(f.getHomeStreetAddress());
+//        p.setAddress2("");
+//        p.setCity(f.getHomeCity());
+//        p.setState(f.getHomeState());
+//        p.setZip(f.getHomeZipCode());
+//
+//        if (f.getEventID().compareTo(201403) == 0) {
+//            p.setReturn("http://cccm.biz:8084/registration/confirmGrace.htm");
+//        }
+//        logger.info("createPaypalRequest exiting");
 
         return p;
     }
