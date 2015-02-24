@@ -1,4 +1,4 @@
-package ws.cccm.application.model;
+package com.cclife.registration.domain;
 
 import java.io.Serializable;
 
