@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import ws.cccm.application.model.LabelValue;
-import ws.cccm.application.model.Payment;
+import com.cclife.registration.domain.Payment;
 import ws.cccm.application.model.Paypal;
 import ws.cccm.application.model.Registration;
 import ws.cccm.application.util.StringUtil;

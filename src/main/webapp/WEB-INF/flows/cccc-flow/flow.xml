@@ -32,11 +32,11 @@
 
     <action-state id="createNew">
         <evaluate expression="registrationController.createNewPerson(form)" 
-                  result="flowScope.person" />
+                  result="flowScope.registrant" />
         <transition to="step2" />
     </action-state>
     
-    <view-state id="step2" model="person" view="cccc/step2">
+    <view-state id="step2" model="registrant" view="cccc/step2">
         <transition on="previous" to="step1"/>
         <transition on="next" to="step3"/> 
         <transition on="cancel" to="cancel"/>

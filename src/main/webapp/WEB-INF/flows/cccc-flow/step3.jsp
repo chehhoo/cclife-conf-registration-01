@@ -13,11 +13,11 @@
                     </tr>
                     <tr>
                         <td>住址 Street Address2: </td>
-                        <td>${form.homeStreetAddress}</td>
+                        <td>${form.address.homeAddress2}</td>
                     </tr>
                     <tr>
                         <td>城市 City: </td>
-                        <td>${form.homeCity}</td>
+                        <td>${form.address.homeCity}</td>
                     </tr>
                     <tr>
                         <td>
@@ -25,7 +25,7 @@
                                 <tbody>
                                     <tr>
                                         <td>州/省 State/Province: </td>
-                                        <td>${form.homeState}</td>
+                                        <td>${form.address.homeState}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -36,25 +36,21 @@
                                 <tbody>
                                     <tr>
                                         <td align="rignt">邮政编码 Zipcode/Postal Code:</td>
-                                        <td>${form.homeZipCode}</td>
+                                        <td>${form.address.homeZip}</td>
                                         <td align="rignt">国家 Country:</td>
-                                        <td>${form.homeCountry}</td>
+                                        <td>${form.address.country}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </td>
                     </tr>
                     <tr>
-                        <td>住家电话 Home Phone: </td>
-                        <td>${form.homePhone}</td>
-                    </tr>
-                    <tr>
-                        <td>手机 Cell Phone: </td>
-                        <td>${form.cellPhone}</td>
+                        <td>聯絡电话 Primary Contact Phone:</td>
+                        <td>${form.address.homePhone}</td>
                     </tr>
                     <tr>
                         <td>电邮 Email: </td>
-                        <td>${form.email}</td>
+                        <td>${form.address.misc1}</td>
                     </tr>
                     <tr>
                         <td>所属教会/机构<br>
@@ -71,7 +67,7 @@
             </table>
 
         </div>
-        <c:forEach items="${form.registrants}" var="person">
+        <c:forEach items="${form.registrants}" var="registrant">
             <hr style="width: 70%; height: 2px;">
             <div>
                 <table style="text-align: left; margin-left: auto; margin-right: auto;">
@@ -88,17 +84,17 @@
                                     <tbody>
                                         <tr>
                                             <td>中文姓名:</td>
-                                            <td>${person.chineseName}</td>
+                                            <td>${registrant.person.chineseName}</td>
                                             <td>English Lastname:</td>
-                                            <td>${person.lastName}</td>
+                                            <td>${registrant.person.lastName}</td>
                                             <td>English Firstname:</td>
-                                            <td>${person.firstName}</td>
+                                            <td>${registrant.person.firstName}</td>
                                         </tr>
                                         <tr>
                                             <td>性别 Gender:</td>
-                                            <td>${person.gender}</td>
+                                            <td>${registrant.person.gender}</td>
                                             <td>年龄 Age/Age Group:</td>
-                                            <td>${person.age}</td>
+                                            <td>${registrant.person.age}</td>
                                             <td>年级 Grade:</td>
 
                                             <td>[TODO]
@@ -106,16 +102,16 @@
                                         </tr>
                                         <tr>
                                             <td>关系 夫妻/子女等:</td>
-                                            <td>${person.relationship}</td>
+                                            <td>${registrant.person.relationship}</td>
                                             <td>信主 Beliver:</td>
 
                                             <td>Y </td>
                                             <td>事奉角色:</td>
-                                            <td>${person.status}</td>
+                                            <td>${registrant.person.status}</td>
                                         </tr>
                                         <tr>
                                             <td>语言 Language:</td>
-                                            <td>${person.preferedLanguage}</td>
+                                            <td>${registrant.person.preferedLanguage}</td>
 
                                             <td>翻译耳机 <br>
                                                 Interpreter Headerphone: </td>
@@ -123,7 +119,7 @@
                                         </tr>
                                         <tr>
                                             <td>电邮 &nbsp;Email:</td>
-                                            <td colspan="5" rowspan="1">${person.email}</td>
+                                            <td colspan="5" rowspan="1">${registrant.person.email}</td>
 
                                         </tr>
                                     </tbody>
@@ -132,6 +128,56 @@
                         </tr>
                     </tbody>
                 </table>                 
+            </div>
+            <hr style="width: 70%; height: 2px;">
+            <c:set var="serve" value="<%=com.cclife.registration.domain.Serve.values()%>" />
+            <div>
+                <table style="text-align: left; width: 600px; height: 62px;"
+                       align="center" border="0" cellpadding="2" cellspacing="2">
+                    <tbody>
+                        <tr>
+                            <td colspan="4" rowspan="1" align="center"><b>大会义工</b></td>
+                        </tr>
+                        <tr>
+                            <td>招待 &nbsp;<c:if test="${registrant.volunteerJobs.contains(serve.USHERS) }">Y</c:if></td>
+                            <td>幼儿看顾 &nbsp;<c:if test="${registrant.volunteerJobs.contains('NURSERY_HELPER') }">Y</c:if></td>
+                            <td>翻译 &nbsp;<c:if test="${registrant.volunteerJobs.contains('INTERPRETER') }">Y</c:if></td>
+                            <td>音影 &nbsp;<c:if test="${registrant.volunteerJobs.contains('AUDIO_VISUAL') }">Y</c:if></td>
+                        </tr>
+                        <tr>
+                            <td>陪谈 &nbsp;<c:if test="${registrant.volunteerJobs.contains('FOLLOWUP') }">Y</c:if></td>
+                            <td>交通 &nbsp;<c:if test="${registrant.volunteerJobs.contains('TRANSPORTATION') }">Y</c:if></td>
+                            <td>医疗 &nbsp;<c:if test="${registrant.volunteerJobs.contains('MEDICAL_SUPPORT') }">Y</c:if></td>
+                            <td>其他 &nbsp;<c:if test="${registrant.volunteerJobs.contains('OTHER') }">Y</c:if></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr style="width: 70%; height: 2px;">
+            <div>
+                <table
+                    style="text-align: center; margin-left: auto; margin-right: auto;">
+                    <tbody>
+                        <tr>
+                            <td colspan="3" rowspan="1"><b>订餐</b></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp; &nbsp;Dec. 28 &nbsp; </td>
+                            <td>&nbsp; &nbsp;Dec. 29 &nbsp; </td>
+                            <td>&nbsp; Dec. 30 &nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>午餐 &nbsp;&nbsp;${registrant.mealplan.lunch1}</td>
+                            <td>午餐 &nbsp;&nbsp;${registrant.mealplan.lunch2}</td>
+                            <td>午餐 &nbsp;&nbsp;${registrant.mealplan.lunch3}</td>
+                        </tr>
+                        <tr>
+                            <td>晚餐 &nbsp;&nbsp;${registrant.mealplan.dinner1}</td>
+                            <td>晚餐 &nbsp;&nbsp;${registrant.mealplan.dinner2}</td>
+                            <td>晚餐 &nbsp;&nbsp;${registrant.mealplan.dinner3}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </c:forEach>
         <hr style="width: 80%; height: 2px;">
