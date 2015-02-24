@@ -1,11 +1,11 @@
 package ws.cccm.registration.service;
 
+import com.cclife.registration.domain.Church;
 import ws.cccm.registration.utils.SearchCriteria;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import ws.cccm.application.model.Church;
 import ws.cccm.registration.dao.ChurchDao;
 
 /**

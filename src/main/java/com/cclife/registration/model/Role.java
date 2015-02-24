@@ -1,5 +1,6 @@
 package com.cclife.registration.model;
 
+import com.cclife.registration.domain.BaseObject;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.security.core.GrantedAuthority;

@@ -14,9 +14,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
-import ws.cccm.application.model.Consent;
-import ws.cccm.application.model.Fee;
-import ws.cccm.application.model.Payment;
+import com.cclife.registration.domain.Consent;
+import com.cclife.registration.domain.Fee;
+import com.cclife.registration.domain.Payment;
 import ws.cccm.application.model.Registration;
 import ws.cccm.application.service.MailEngine;
 

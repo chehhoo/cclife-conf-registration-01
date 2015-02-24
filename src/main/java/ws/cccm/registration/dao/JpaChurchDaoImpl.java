@@ -16,7 +16,7 @@ import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ws.cccm.application.model.Church;
+import com.cclife.registration.domain.Church;
 import org.apache.log4j.Logger;
 
 /**

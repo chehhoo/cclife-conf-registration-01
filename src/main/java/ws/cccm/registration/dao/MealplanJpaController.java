@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import ws.cccm.application.model.Mealplan;
+import com.cclife.registration.domain.Mealplan;
 import ws.cccm.registration.dao.exceptions.NonexistentEntityException;
 import ws.cccm.registration.dao.exceptions.PreexistingEntityException;
 

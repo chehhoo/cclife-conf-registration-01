@@ -2,7 +2,7 @@ package ws.cccm.registration.service;
 
 import java.util.List;
 import ws.cccm.application.model.BaseObject;
-import ws.cccm.application.model.Payment;
+import com.cclife.registration.domain.Payment;
 import ws.cccm.registration.dao.PaymentDao;
 
 public class PaymentReceivedManager implements PaymentManager {

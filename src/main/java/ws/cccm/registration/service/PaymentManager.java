@@ -1,6 +1,6 @@
 package ws.cccm.registration.service;
 
-import ws.cccm.application.model.Payment;
+import com.cclife.registration.domain.Payment;
 
 public interface PaymentManager {
     public Payment getPaymentRecord(long id);

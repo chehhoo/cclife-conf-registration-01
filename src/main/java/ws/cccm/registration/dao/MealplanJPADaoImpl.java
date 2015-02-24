@@ -14,7 +14,7 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ws.cccm.application.model.Mealplan;
+import com.cclife.registration.domain.Mealplan;
 import ws.cccm.registration.dao.exceptions.NonexistentEntityException;
 import ws.cccm.registration.dao.exceptions.PreexistingEntityException;
 import ws.cccm.registration.dao.exceptions.RollbackFailureException;

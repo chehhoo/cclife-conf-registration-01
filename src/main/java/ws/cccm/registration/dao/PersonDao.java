@@ -5,7 +5,7 @@
 package ws.cccm.registration.dao;
 
 
-import ws.cccm.application.model.Person;
+import com.cclife.registration.domain.Person;
 
 /**
  *

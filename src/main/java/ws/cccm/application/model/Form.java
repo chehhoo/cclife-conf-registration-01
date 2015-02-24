@@ -8,6 +8,10 @@ package ws.cccm.application.model;
  *
  * @author CH1CHOO1
  */
+import com.cclife.registration.domain.Fee;
+import com.cclife.registration.domain.Serve;
+import com.cclife.registration.domain.Person;
+import com.cclife.registration.domain.Family;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;

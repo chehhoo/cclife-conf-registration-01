@@ -7,8 +7,8 @@ package ws.cccm.registration.service;
 
 import java.util.List;
 import ws.cccm.application.model.BaseObject;
-import ws.cccm.application.model.Consent;
-import ws.cccm.application.model.Fee;
+import com.cclife.registration.domain.Consent;
+import com.cclife.registration.domain.Fee;
 import ws.cccm.application.model.Registration;
 /**
  *

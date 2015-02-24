@@ -1,7 +1,7 @@
 package ws.cccm.registration.dao;
 
 import java.util.List;
-import ws.cccm.application.model.Church;
+import com.cclife.registration.domain.Church;
 
 /**
  * User Data Access Object (GenericDao) interface.

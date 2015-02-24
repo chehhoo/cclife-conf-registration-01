@@ -19,11 +19,10 @@
     -->
   <persistence-unit name="registrationDatabase" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <class>ws.cccm.application.model.Payment</class>
     <class>ws.cccm.application.model.Registration</class>
-    <class>ws.cccm.application.model.Church</class>
-    <class>ws.cccm.application.model.Mealplan</class>
-    <class>ws.cccm.application.model.Consent</class>
+    <class>com.cclife.registration.domain.Consent</class>
+    <class>com.cclife.registration.domain.Mealplan</class>
+    <class>com.cclife.registration.domain.Payment</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.connection.username" value="root"/>

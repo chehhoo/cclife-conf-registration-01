@@ -1,5 +1,10 @@
 package ws.cccm.registration.service;
 
+import com.cclife.registration.domain.Mealplan;
+import com.cclife.registration.domain.Fee;
+import com.cclife.registration.domain.Consent;
+import com.cclife.registration.domain.Serve;
+import com.cclife.registration.domain.Person;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.*;

@@ -2,7 +2,7 @@ package ws.cccm.registration.service;
 
 import ws.cccm.registration.utils.SearchCriteria;
 import java.util.List;
-import ws.cccm.application.model.Church;
+import com.cclife.registration.domain.Church;
 
 /**
  * A service interface for retrieving hotels and bookings from a backing repository. Also supports the ability to cancel

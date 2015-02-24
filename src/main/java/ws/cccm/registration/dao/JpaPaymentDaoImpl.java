@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ws.cccm.application.model.BaseObject;
-import ws.cccm.application.model.Payment;
+import com.cclife.registration.domain.Payment;
 
 /**
  *
