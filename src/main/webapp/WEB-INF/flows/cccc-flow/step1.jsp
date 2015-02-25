@@ -37,12 +37,6 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>邮政编码 Zipcode/Postal Code:</td>
-                        <td>
-                            <form:input path="address.homeZip" name="homeZip" size="10" maxlength="15"/>
-                        </td>
-                    </tr>
-                    <tr>
                         <td colspan="2" align="center">若非美国和加拿大,
                             请填写如下信息：If other than
                             Canada or United States
