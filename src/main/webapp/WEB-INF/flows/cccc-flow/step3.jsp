@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.cclife.registration.domain.Serve" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="embeddedFlow">
@@ -67,13 +68,13 @@
             </table>
 
         </div>
-        <c:forEach items="${form.registrants}" var="registrant">
+        <c:forEach items="${form.registrants}" var="registrant" varStatus="count">
             <hr style="width: 70%; height: 2px;">
             <div>
                 <table style="text-align: left; margin-left: auto; margin-right: auto;">
                     <tbody>
                         <tr>
-                            <td align="left"> <b>第一个人的资料 Information of Person No. 1 </b>
+                            <td align="left"> <b>第 ${count.count} 个人的资料 Information of Person No. ${count.count} </b>
 
                             </td>
                             <td align="right">  </td>
@@ -131,24 +132,33 @@
             </div>
             <hr style="width: 70%; height: 2px;">
             <c:set var="serve" value="<%=com.cclife.registration.domain.Serve.values()%>" />
+            <c:forEach items="${serve}" var="se">
+                <c:if test="${registrant.volunteerJobs.contains(se) && se=='USHERS' }"><c:set var="ushers" value="Y" /></c:if>
+                <c:if test="${registrant.volunteerJobs.contains(se) && se=='NURSERY_HELPER' }"><c:set var="nursery_helper" value="Y" /></c:if>
+                <c:if test="${registrant.volunteerJobs.contains(se) && se=='INTERPRETER' }"><c:set var="interpreter" value="Y" /></c:if>
+                <c:if test="${registrant.volunteerJobs.contains(se) && se=='AUDIO_VISUAL' }"><c:set var="audio_visual" value="Y" /></c:if>
+                <c:if test="${registrant.volunteerJobs.contains(se) && se=='FOLLOWUP' }"><c:set var="followup" value="Y" /></c:if>
+                <c:if test="${registrant.volunteerJobs.contains(se) && se=='TRANSPORTATION' }"><c:set var="transportation" value="Y" /></c:if>
+                <c:if test="${registrant.volunteerJobs.contains(se) && se=='MEDICAL_SUPPORT' }"><c:set var="medical_support" value="Y" /></c:if>
+                <c:if test="${registrant.volunteerJobs.contains(se) && se=='OTHER' }"><c:set var="other" value="Y" /></c:if>
+            </c:forEach>
             <div>
-                <table style="text-align: left; width: 600px; height: 62px;"
-                       align="center" border="0" cellpadding="2" cellspacing="2">
+                <table style="text-align: left; width: 600px; height: 62px;" align="center" border="0" cellpadding="2" cellspacing="2">
                     <tbody>
                         <tr>
                             <td colspan="4" rowspan="1" align="center"><b>大会义工</b></td>
                         </tr>
                         <tr>
-                            <td>招待 &nbsp;<c:if test="${registrant.volunteerJobs.contains(serve.USHERS) }">Y</c:if></td>
-                            <td>幼儿看顾 &nbsp;<c:if test="${registrant.volunteerJobs.contains('NURSERY_HELPER') }">Y</c:if></td>
-                            <td>翻译 &nbsp;<c:if test="${registrant.volunteerJobs.contains('INTERPRETER') }">Y</c:if></td>
-                            <td>音影 &nbsp;<c:if test="${registrant.volunteerJobs.contains('AUDIO_VISUAL') }">Y</c:if></td>
+                            <td>招待 &nbsp;${ushers}</td>
+                            <td>幼儿看顾 &nbsp;${nursery_helper}</td>
+                            <td>翻译 &nbsp;${interpreter}</td>
+                            <td>音影 &nbsp;${audio_visual}</td>
                         </tr>
                         <tr>
-                            <td>陪谈 &nbsp;<c:if test="${registrant.volunteerJobs.contains('FOLLOWUP') }">Y</c:if></td>
-                            <td>交通 &nbsp;<c:if test="${registrant.volunteerJobs.contains('TRANSPORTATION') }">Y</c:if></td>
-                            <td>医疗 &nbsp;<c:if test="${registrant.volunteerJobs.contains('MEDICAL_SUPPORT') }">Y</c:if></td>
-                            <td>其他 &nbsp;<c:if test="${registrant.volunteerJobs.contains('OTHER') }">Y</c:if></td>
+                            <td>陪谈 &nbsp;${followup}</td>
+                            <td>交通 &nbsp;${transportation}</td>
+                            <td>医疗 &nbsp;${medical_support}</td>
+                            <td>其他 &nbsp;${other}</td>
                         </tr>
                     </tbody>
                 </table>
