@@ -17,6 +17,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -24,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ephesus
  */
 @Entity
-@Table(name = "donation", catalog = "cccmdb1", schema = "")
+@Table(name = "donation")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Donation.findAll", query = "SELECT d FROM Donation d"),
@@ -38,19 +40,22 @@ public class Donation implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ReceiptNumber", nullable = false)
+    @NotNull
+    @Column(name = "ReceiptNumber")
     private Integer receiptNumber;
     @Column(name = "PersonID")
     private Integer personID;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "Amounts", precision = 19, scale = 4)
+    @Column(name = "Amounts")
     private BigDecimal amounts;
     @Column(name = "Date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
-    @Column(name = "CheckNumber", length = 10)
+    @Size(max = 10)
+    @Column(name = "CheckNumber")
     private String checkNumber;
-    @Column(name = "Purpose", length = 50)
+    @Size(max = 50)
+    @Column(name = "Purpose")
     private String purpose;
 
     public Donation() {
@@ -130,7 +135,7 @@ public class Donation implements Serializable {
 
     @Override
     public String toString() {
-        return "ws.cccm.model.Donation[ receiptNumber=" + receiptNumber + " ]";
+        return "com.cclife.registration.model.Donation[ receiptNumber=" + receiptNumber + " ]";
     }
     
 }

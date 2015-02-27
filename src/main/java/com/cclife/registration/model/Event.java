@@ -18,6 +18,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -25,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ephesus
  */
 @Entity
-@Table(name = "event", catalog = "cccmdb1", schema = "")
+@Table(name = "event")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e"),
@@ -49,14 +51,17 @@ public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "EventID", nullable = false)
+    @Column(name = "EventID")
     private Integer eventID;
-    @Column(name = "Name", length = 50)
+    @Size(max = 50)
+    @Column(name = "Name")
     private String name;
     @Basic(optional = false)
-    @Column(name = "Category", nullable = false)
+    @NotNull
+    @Column(name = "Category")
     private int category;
-    @Column(name = "Description", length = 50)
+    @Size(max = 50)
+    @Column(name = "Description")
     private String description;
     @Column(name = "StartDate")
     @Temporal(TemporalType.TIMESTAMP)
@@ -64,17 +69,21 @@ public class Event implements Serializable {
     @Column(name = "EndDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
-    @Column(name = "Address", length = 50)
+    @Size(max = 50)
+    @Column(name = "Address")
     private String address;
-    @Column(name = "City", length = 50)
+    @Size(max = 50)
+    @Column(name = "City")
     private String city;
-    @Column(name = "State", length = 50)
+    @Size(max = 50)
+    @Column(name = "State")
     private String state;
     @Column(name = "Zip")
     private Integer zip;
     @Column(name = "Phone")
     private Integer phone;
-    @Column(name = "Direction", length = 50)
+    @Size(max = 50)
+    @Column(name = "Direction")
     private String direction;
     @Column(name = "ContactPersonID1")
     private Integer contactPersonID1;
@@ -237,7 +246,7 @@ public class Event implements Serializable {
 
     @Override
     public String toString() {
-        return "ws.cccm.model.Event[ eventID=" + eventID + " ]";
+        return "com.cclife.registration.model.Event[ eventID=" + eventID + " ]";
     }
     
 }

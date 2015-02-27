@@ -16,6 +16,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -23,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ephesus
  */
 @Entity
-@Table(name = "receipt_print_history", catalog = "cccmdb1", schema = "")
+@Table(name = "receipt_print_history")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ReceiptPrintHistory.findAll", query = "SELECT r FROM ReceiptPrintHistory r"),
@@ -47,35 +49,51 @@ public class ReceiptPrintHistory implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ReceiptID", nullable = false, length = 50)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "ReceiptID")
     private String receiptID;
-    @Column(name = "ContributionSource", length = 50)
+    @Size(max = 50)
+    @Column(name = "ContributionSource")
     private String contributionSource;
-    @Column(name = "ContributorID", length = 50)
+    @Size(max = 50)
+    @Column(name = "ContributorID")
     private String contributorID;
-    @Column(name = "EventID", length = 50)
+    @Size(max = 50)
+    @Column(name = "EventID")
     private String eventID;
-    @Column(name = "ReceiptType", length = 50)
+    @Size(max = 50)
+    @Column(name = "ReceiptType")
     private String receiptType;
-    @Column(name = "FirstName", length = 50)
+    @Size(max = 50)
+    @Column(name = "FirstName")
     private String firstName;
-    @Column(name = "LastName", length = 50)
+    @Size(max = 50)
+    @Column(name = "LastName")
     private String lastName;
-    @Column(name = "Address", length = 50)
+    @Size(max = 50)
+    @Column(name = "Address")
     private String address;
-    @Column(name = "City", length = 50)
+    @Size(max = 50)
+    @Column(name = "City")
     private String city;
-    @Column(name = "State", length = 50)
+    @Size(max = 50)
+    @Column(name = "State")
     private String state;
-    @Column(name = "Zip", length = 50)
+    @Size(max = 50)
+    @Column(name = "Zip")
     private String zip;
-    @Column(name = "Date", length = 50)
+    @Size(max = 50)
+    @Column(name = "Date")
     private String date;
-    @Column(name = "ReceiptAmount", length = 50)
+    @Size(max = 50)
+    @Column(name = "ReceiptAmount")
     private String receiptAmount;
-    @Column(name = "CheckNumber", length = 50)
+    @Size(max = 50)
+    @Column(name = "CheckNumber")
     private String checkNumber;
-    @Column(name = "CreditCardNumber", length = 50)
+    @Size(max = 50)
+    @Column(name = "CreditCardNumber")
     private String creditCardNumber;
     @Column(name = "ReceiptPrintDate")
     @Temporal(TemporalType.TIMESTAMP)
@@ -238,7 +256,7 @@ public class ReceiptPrintHistory implements Serializable {
 
     @Override
     public String toString() {
-        return "ws.cccm.model.ReceiptPrintHistory[ receiptID=" + receiptID + " ]";
+        return "com.cclife.registration.model.ReceiptPrintHistory[ receiptID=" + receiptID + " ]";
     }
     
 }

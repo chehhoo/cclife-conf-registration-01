@@ -5,6 +5,8 @@
  */
 package com.cclife.registration.domain;
 
+import com.cclife.registration.model.Mealplan;
+import com.cclife.registration.model.Person;
 import java.util.Set;
 
 /**
@@ -14,7 +16,7 @@ import java.util.Set;
 public class Registrant extends BaseObject {
     private Person person;
     private Mealplan mealplan;
-    private Set<Serve> volunteerJobs;
+    private Set<Server> volunteerJobs;
 
     /**
      * @return the person
@@ -47,14 +49,14 @@ public class Registrant extends BaseObject {
     /**
      * @return the volunteerJobs
      */
-    public Set<Serve> getVolunteerJobs() {
+    public Set<Server> getVolunteerJobs() {
         return volunteerJobs;
     }
 
     /**
      * @param volunteerJobs the volunteerJobs to set
      */
-    public void setVolunteerJobs(Set<Serve> volunteerJobs) {
+    public void setVolunteerJobs(Set<Server> volunteerJobs) {
         this.volunteerJobs = volunteerJobs;
     }
 

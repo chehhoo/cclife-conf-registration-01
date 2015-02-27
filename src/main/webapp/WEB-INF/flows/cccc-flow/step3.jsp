@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.cclife.registration.domain.Serve" %>
+<%@ page import="com.cclife.registration.domain.Server" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="embeddedFlow">
@@ -131,7 +131,7 @@
                 </table>                 
             </div>
             <hr style="width: 70%; height: 2px;">
-            <c:set var="serve" value="<%=com.cclife.registration.domain.Serve.values()%>" />
+            <c:set var="serve" value="<%=com.cclife.registration.domain.Server.values()%>" />
             <c:forEach items="${serve}" var="se">
                 <c:if test="${registrant.volunteerJobs.contains(se) && se=='USHERS' }"><c:set var="ushers" value="Y" /></c:if>
                 <c:if test="${registrant.volunteerJobs.contains(se) && se=='NURSERY_HELPER' }"><c:set var="nursery_helper" value="Y" /></c:if>

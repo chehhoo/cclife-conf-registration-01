@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ephesus
  */
 @Entity
-@Table(name = "contribution", catalog = "cccmdb1", schema = "")
+@Table(name = "contribution")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Contribution.findAll", query = "SELECT c FROM Contribution c"),
@@ -46,28 +47,34 @@ public class Contribution implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ContributionID", nullable = false)
+    @Column(name = "ContributionID")
     private Integer contributionID;
     @Column(name = "CommitContributionID")
     private Integer commitContributionID;
-    @Column(name = "ReceiptID", length = 50)
+    @Size(max = 50)
+    @Column(name = "ReceiptID")
     private String receiptID;
-    @Column(name = "TargetSource", length = 50)
+    @Size(max = 50)
+    @Column(name = "TargetSource")
     private String targetSource;
     @Column(name = "TargetID")
     private Integer targetID;
-    @Column(name = "ContributionSource", length = 50)
+    @Size(max = 50)
+    @Column(name = "ContributionSource")
     private String contributionSource;
     @Column(name = "ContributorID")
     private Integer contributorID;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "ContributionAmount", precision = 22)
+    @Column(name = "ContributionAmount")
     private Double contributionAmount;
-    @Column(name = "TransactionType", length = 50)
+    @Size(max = 50)
+    @Column(name = "TransactionType")
     private String transactionType;
-    @Column(name = "ReferenceNumber", length = 50)
+    @Size(max = 50)
+    @Column(name = "ReferenceNumber")
     private String referenceNumber;
-    @Column(name = "Category", length = 50)
+    @Size(max = 50)
+    @Column(name = "Category")
     private String category;
     @Column(name = "ReceivedDate")
     @Temporal(TemporalType.TIMESTAMP)
@@ -198,7 +205,7 @@ public class Contribution implements Serializable {
 
     @Override
     public String toString() {
-        return "ws.cccm.model.Contribution[ contributionID=" + contributionID + " ]";
+        return "com.cclife.registration.model.Contribution[ contributionID=" + contributionID + " ]";
     }
     
 }

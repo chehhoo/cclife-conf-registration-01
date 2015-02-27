@@ -6,17 +6,20 @@
 package com.cclife.registration.controller;
 
 import com.cclife.registration.domain.LabelValue;
-import com.cclife.registration.domain.Mealplan;
+import com.cclife.registration.domain.PaymentMethod;
+import com.cclife.registration.domain.Paypal;
+import com.cclife.registration.model.Mealplan;
 import com.cclife.registration.domain.RegistrationForm;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.stereotype.Component;
-import com.cclife.registration.domain.Person;
+import com.cclife.registration.model.Person;
 import com.cclife.registration.domain.Registrant;
 import java.text.ParseException;
 import org.apache.log4j.Logger;
-import ws.cccm.application.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.cclife.registration.util.DateUtil;
 
 /**
  *
@@ -26,7 +29,13 @@ import ws.cccm.application.util.DateUtil;
 public class RegistrationController {
 
     private static final Logger logger = Logger.getLogger(RegistrationController.class);
-
+    @Autowired
+    private Paypal paypalInstance;
+    @Autowired
+    private String confirmationUrl;
+    @Autowired
+    private String confirmationAltUrl;
+    
     public RegistrationForm initializeForm() {
         RegistrationForm registrationForm = new RegistrationForm();
 
@@ -287,7 +296,7 @@ public class RegistrationController {
 
         countryList.add(new LabelValue("United States America", "US"));
         countryList.add(new LabelValue("Canada", "CA"));
-        
+
         registrationForm.setCountries(countryList);
 
         try {
@@ -298,13 +307,13 @@ public class RegistrationController {
         } catch (ParseException ex) {
             logger.error("Error generating Registration ID");
         }
-
+        registrationForm.setPaymentMethod(PaymentMethod.WAIVED);
         logger.info("initialize Form exiting");
         return registrationForm;
     }
 
     public Registrant createNewPerson(RegistrationForm form) {
-        
+
         if (form.getRegistrants() == null) {
             ArrayList<Registrant> rlist = new ArrayList<Registrant>();
             form.setRegistrants(rlist);
@@ -317,7 +326,48 @@ public class RegistrationController {
         form.getRegistrants().add(registrant);
         Mealplan mealPlan = new Mealplan();
         registrant.setMealplan(mealPlan);
-        
+
         return registrant;
+    }
+
+    public Paypal createPaypalRequest(RegistrationForm form) {
+
+        logger.info("createPaypalRequest entering");
+
+        paypalInstance.setItem_number(String.valueOf(form.getFormID().longValue()));
+
+//        p.setCmd("_ext-enter");
+//        p.setRedirect_cmd("_xclick");
+//        p.setBusiness("Registration@cccm.ws");
+//        p.setBusiness("clhoo_1288811245_biz@msn.com");
+//        p.setItem_name("CCCC/Grace 2014");
+        double total = form.getExpense().getTotalAdultRegistrationFee() + form.getExpense().getTotalNonAdultRegistrationFee() + form.getExpense().getTotalMealsFee();
+        paypalInstance.setAmount(String.valueOf(total));
+        paypalInstance.setCustom(String.valueOf(total));
+//        p.setNo_shipping("0");
+//        p.setNo_note("1");
+//        p.setCurrency_code("USD");
+//        p.setLc("US");
+//        p.setBn("PP-BuyNowBF");
+//        p.setReturn("http://localhost:9090/Registration/confirm.htm");
+//        p.setReturn("http://cccm.biz:8084/registration/confirm.htm");
+//        p.setNotify_url("http://cccm.biz:8084/registration/instantPaymentNotification.htm");
+//        p.setRm("2");
+        paypalInstance.setEmail(form.getAddress().getMisc1());
+        paypalInstance.setFirst_name("");
+        paypalInstance.setLast_name("");
+        paypalInstance.setAddress1(form.getAddress().getHomeAddress());
+        paypalInstance.setAddress2(form.getAddress().getHomeAddress2());
+        paypalInstance.setCity(form.getAddress().getHomeCity());
+        paypalInstance.setState(form.getAddress().getHomeState());
+        paypalInstance.setZip(form.getAddress().getHomeZip());
+        paypalInstance.setReturn(confirmationUrl);
+
+        if (form.getEventID().compareTo(201403) == 0) {
+            paypalInstance.setReturn(confirmationAltUrl);
+        }
+        logger.info("createPaypalRequest exiting");
+
+        return paypalInstance;
     }
 }

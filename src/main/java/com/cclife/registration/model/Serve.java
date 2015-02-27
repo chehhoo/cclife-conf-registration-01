@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -20,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ephesus
  */
 @Entity
-@Table(name = "serve", catalog = "cccmdb1", schema = "")
+@Table(name = "serve")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Serve.findAll", query = "SELECT s FROM Serve s"),
@@ -48,7 +49,8 @@ public class Serve implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "PersonID", nullable = false)
+    @NotNull
+    @Column(name = "PersonID")
     private Integer personID;
     @Column(name = "Video")
     private Boolean video;
@@ -278,7 +280,7 @@ public class Serve implements Serializable {
 
     @Override
     public String toString() {
-        return "ws.cccm.model.Serve[ personID=" + personID + " ]";
+        return "com.cclife.registration.model.Serve[ personID=" + personID + " ]";
     }
     
 }

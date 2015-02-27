@@ -8,19 +8,17 @@ package com.cclife.registration.domain;
  *
  * @author CH1CHOO1
  */
-import ws.cccm.application.model.*;
-import java.text.ParseException;
+import com.cclife.registration.model.Payment;
+import com.cclife.registration.model.Family;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
 import javax.persistence.Column;
 import javax.persistence.Temporal;
 import org.apache.log4j.Logger;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
 import org.springframework.binding.validation.ValidationContext;
-import ws.cccm.application.util.DateUtil;
 
 /**
  * Object mapping for hibernate-handled table: registrationdata.
@@ -53,7 +51,8 @@ public class RegistrationForm extends BaseObject {
     private String discountCode;
     private Integer eventID;
     private Fee expense;
-        
+    
+    private PaymentMethod paymentMethod;  
         
     private List<LabelValue> ageGroup;
     private List<LabelValue> countries;
@@ -70,18 +69,18 @@ public class RegistrationForm extends BaseObject {
         // Default constructor
     }
 
-    public void initialize() {
-
-        logger.debug("Initialize Form...");
-
-        try {
-            registrationDate = DateUtil.getToday().getTime();
-        } catch (ParseException ex) {
-            java.util.logging.Logger.getLogger(RegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        logger.debug("Exit initialize Form...");
-    }
+//    public void initialize() {
+//
+//        logger.debug("Initialize Form...");
+//
+//        try {
+//            registrationDate = DateUtil.getToday().getTime();
+//        } catch (ParseException ex) {
+//            java.util.logging.Logger.getLogger(RegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        logger.debug("Exit initialize Form...");
+//    }
 
     public void validateStart(ValidationContext context) {
         logger.debug("Validate start state...");
@@ -232,90 +231,90 @@ public class RegistrationForm extends BaseObject {
 //                "Exit main state...");
 //
 //    }
-    private boolean verifyRegistrationTableVariable1(MessageContext messages, String firstName, String lastName, String gender, String age, String status, String language, Faith faith, Integer rowNum) {
-
-        String row = rowNum == 1 ? "" : String.valueOf(rowNum);
-        logger.debug("Faith:[" + faith + "]");
-        if ((firstName == null || firstName.length() <= 0)
-                && (lastName == null || lastName.length() <= 0)) {
-        } else {
-            if (firstName != null && firstName.isEmpty()) {
-                messages.addMessage(new MessageBuilder().error().source("firstName" + row).
-                        defaultText("First name is required").build());
-            } else if (lastName != null && lastName.isEmpty()) {
-                messages.addMessage(new MessageBuilder().error().source("lastName" + row).
-                        defaultText("Last name is required").build());
-            } else if (gender == null || gender.isEmpty()) {
-                messages.addMessage(new MessageBuilder().error().source("gender" + row).
-                        defaultText("Gender is required").build());
-            } else if (age != null && age.isEmpty()) {
-                messages.addMessage(new MessageBuilder().error().source("age" + row).
-                        defaultText("Age is required").build());
-            } else if (status != null && status.isEmpty()) {
-                messages.addMessage(new MessageBuilder().error().source("status" + row).
-                        defaultText("Status is required").build());
-            } else if (language != null && language.isEmpty()) {
-                messages.addMessage(new MessageBuilder().error().source("language" + row).
-                        defaultText("Please select which event you will attend").build());
-            } else if (faith == null) {
-                messages.addMessage(new MessageBuilder().error().source("faith" + row).
-                        defaultText("Please provide your faith status").build());
-            }
-
-            // It is verified
-            return true;
-        }
-        // Does not meet condition, it is not verified
-        return false;
-    }
-
-    private boolean verifyRegistrationTableVariable2(MessageContext messages, String firstName, String lastName, String gender, String age, String status, String language, String email, Integer rowNum) {
-
-        String row = rowNum == 1 ? "" : String.valueOf(rowNum);
-
-        if ((firstName == null || firstName.length() <= 0)
-                && (lastName == null || lastName.length() <= 0)) {
-        } else {
-            if (firstName != null && firstName.isEmpty()) {
-                messages.addMessage(new MessageBuilder().error().source("firstName" + row).
-                        defaultText("First name is required").build());
-            } else if (lastName != null && lastName.isEmpty()) {
-                messages.addMessage(new MessageBuilder().error().source("lastName" + row).
-                        defaultText("Last name is required").build());
-            } else if (gender == null || gender.isEmpty()) {
-                messages.addMessage(new MessageBuilder().error().source("gender" + row).
-                        defaultText("Gender is required").build());
-            } else if (age != null && age.isEmpty()) {
-                messages.addMessage(new MessageBuilder().error().source("age" + row).
-                        defaultText("Age is required").build());
-            } else if (status != null && status.isEmpty()) {
-                messages.addMessage(new MessageBuilder().error().source("status" + row).
-                        defaultText("Status is required").build());
-            } else if (language != null && language.isEmpty()) {
-                messages.addMessage(new MessageBuilder().error().source("language" + row).
-                        defaultText("Please select which event you will attend").build());
-            } else if (email != null && email.isEmpty() && (language != null && language.contentEquals("E"))) {
-                if (row.isEmpty()) {
-                    row = "1";
-                }
-                messages.addMessage(new MessageBuilder().error().source("email" + row).
-                        defaultText("Please provide your email for GRACE communication").build());
-            }
-
-            // It is verified
-            return true;
-        }
-
-        // Does not meet condition, it is not verified
-        return false;
-    }
-
-    public void validateMain1(ValidationContext context) {
-
-        logger.debug("Validate main state...");
-
-        MessageContext messages = context.getMessageContext();
-
+//    private boolean verifyRegistrationTableVariable1(MessageContext messages, String firstName, String lastName, String gender, String age, String status, String language, Faith faith, Integer rowNum) {
+//
+//        String row = rowNum == 1 ? "" : String.valueOf(rowNum);
+//        logger.debug("Faith:[" + faith + "]");
+//        if ((firstName == null || firstName.length() <= 0)
+//                && (lastName == null || lastName.length() <= 0)) {
+//        } else {
+//            if (firstName != null && firstName.isEmpty()) {
+//                messages.addMessage(new MessageBuilder().error().source("firstName" + row).
+//                        defaultText("First name is required").build());
+//            } else if (lastName != null && lastName.isEmpty()) {
+//                messages.addMessage(new MessageBuilder().error().source("lastName" + row).
+//                        defaultText("Last name is required").build());
+//            } else if (gender == null || gender.isEmpty()) {
+//                messages.addMessage(new MessageBuilder().error().source("gender" + row).
+//                        defaultText("Gender is required").build());
+//            } else if (age != null && age.isEmpty()) {
+//                messages.addMessage(new MessageBuilder().error().source("age" + row).
+//                        defaultText("Age is required").build());
+//            } else if (status != null && status.isEmpty()) {
+//                messages.addMessage(new MessageBuilder().error().source("status" + row).
+//                        defaultText("Status is required").build());
+//            } else if (language != null && language.isEmpty()) {
+//                messages.addMessage(new MessageBuilder().error().source("language" + row).
+//                        defaultText("Please select which event you will attend").build());
+//            } else if (faith == null) {
+//                messages.addMessage(new MessageBuilder().error().source("faith" + row).
+//                        defaultText("Please provide your faith status").build());
+//            }
+//
+//            // It is verified
+//            return true;
+//        }
+//        // Does not meet condition, it is not verified
+//        return false;
+//    }
+//
+//    private boolean verifyRegistrationTableVariable2(MessageContext messages, String firstName, String lastName, String gender, String age, String status, String language, String email, Integer rowNum) {
+//
+//        String row = rowNum == 1 ? "" : String.valueOf(rowNum);
+//
+//        if ((firstName == null || firstName.length() <= 0)
+//                && (lastName == null || lastName.length() <= 0)) {
+//        } else {
+//            if (firstName != null && firstName.isEmpty()) {
+//                messages.addMessage(new MessageBuilder().error().source("firstName" + row).
+//                        defaultText("First name is required").build());
+//            } else if (lastName != null && lastName.isEmpty()) {
+//                messages.addMessage(new MessageBuilder().error().source("lastName" + row).
+//                        defaultText("Last name is required").build());
+//            } else if (gender == null || gender.isEmpty()) {
+//                messages.addMessage(new MessageBuilder().error().source("gender" + row).
+//                        defaultText("Gender is required").build());
+//            } else if (age != null && age.isEmpty()) {
+//                messages.addMessage(new MessageBuilder().error().source("age" + row).
+//                        defaultText("Age is required").build());
+//            } else if (status != null && status.isEmpty()) {
+//                messages.addMessage(new MessageBuilder().error().source("status" + row).
+//                        defaultText("Status is required").build());
+//            } else if (language != null && language.isEmpty()) {
+//                messages.addMessage(new MessageBuilder().error().source("language" + row).
+//                        defaultText("Please select which event you will attend").build());
+//            } else if (email != null && email.isEmpty() && (language != null && language.contentEquals("E"))) {
+//                if (row.isEmpty()) {
+//                    row = "1";
+//                }
+//                messages.addMessage(new MessageBuilder().error().source("email" + row).
+//                        defaultText("Please provide your email for GRACE communication").build());
+//            }
+//
+//            // It is verified
+//            return true;
+//        }
+//
+//        // Does not meet condition, it is not verified
+//        return false;
+//    }
+//
+//    public void validateMain1(ValidationContext context) {
+//
+//        logger.debug("Validate main state...");
+//
+//        MessageContext messages = context.getMessageContext();
+//
 //        messages.addMessage(new MessageBuilder().error().source("username").
 //                    code("account.username.required").build());
 //        if ((this.getFirstName() != null && this.getFirstName().isEmpty())
@@ -428,7 +427,7 @@ public class RegistrationForm extends BaseObject {
 //            messages.addMessage(new MessageBuilder().error().source("email").
 //                    defaultText("You have enter invalid email").build());
 //        }
-    }
+//    }
 
 //    public void validateConsent(ValidationContext context) {
 //
@@ -466,16 +465,7 @@ public class RegistrationForm extends BaseObject {
 //                    defaultText("The emails you entered do not match").build());
 //        }
 //    }
-    public void validateReview(ValidationContext context) {
-
-//        logger.debug("Validate review1 state..[" + paymentMethod + "]");
-        MessageContext messages = context.getMessageContext();
-
-//        if (paymentMethod == null) {
-//            messages.addMessage(new MessageBuilder().error().source("paymentMethod").
-//                    defaultText("Please select your payment option").build());
-//        }
-    }
+    
 
 //    public boolean isConsentNeeded() {
 //        return (age == null || age.isEmpty() || age.charAt(0) != 'A')
@@ -1054,6 +1044,20 @@ public class RegistrationForm extends BaseObject {
      */
     public void setCountries(List<LabelValue> countries) {
         this.countries = countries;
+    }
+
+    /**
+     * @return the paymentMethod
+     */
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    /**
+     * @param paymentMethod the paymentMethod to set
+     */
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
 }

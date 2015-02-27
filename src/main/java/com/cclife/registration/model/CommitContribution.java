@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ephesus
  */
 @Entity
-@Table(name = "commit_contribution", catalog = "cccmdb1", schema = "")
+@Table(name = "commit_contribution")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CommitContribution.findAll", query = "SELECT c FROM CommitContribution c"),
@@ -44,13 +45,15 @@ public class CommitContribution implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "CommitContributionID", nullable = false)
+    @Column(name = "CommitContributionID")
     private Integer commitContributionID;
     @Column(name = "EventID")
     private Integer eventID;
-    @Column(name = "Category", length = 50)
+    @Size(max = 50)
+    @Column(name = "Category")
     private String category;
-    @Column(name = "CommitContributionInterval", length = 50)
+    @Size(max = 50)
+    @Column(name = "CommitContributionInterval")
     private String commitContributionInterval;
     @Column(name = "StartDate")
     @Temporal(TemporalType.TIMESTAMP)
@@ -177,7 +180,7 @@ public class CommitContribution implements Serializable {
 
     @Override
     public String toString() {
-        return "ws.cccm.model.CommitContribution[ commitContributionID=" + commitContributionID + " ]";
+        return "com.cclife.registration.model.CommitContribution[ commitContributionID=" + commitContributionID + " ]";
     }
     
 }

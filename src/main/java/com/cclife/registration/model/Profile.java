@@ -16,6 +16,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -23,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ephesus
  */
 @Entity
-@Table(name = "profile", catalog = "cccmdb1", schema = "")
+@Table(name = "profile")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Profile.findAll", query = "SELECT p FROM Profile p"),
@@ -52,7 +54,8 @@ public class Profile implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "PersonID", nullable = false)
+    @NotNull
+    @Column(name = "PersonID")
     private Integer personID;
     @Column(name = "Leader")
     private Boolean leader;
@@ -62,11 +65,13 @@ public class Profile implements Serializable {
     private Boolean seeker;
     @Column(name = "ChurchID")
     private Integer churchID;
-    @Column(name = "RoomID", length = 10)
+    @Size(max = 10)
+    @Column(name = "RoomID")
     private String roomID;
     @Column(name = "GroupID")
     private Integer groupID;
-    @Column(name = "Comments", length = 255)
+    @Size(max = 255)
+    @Column(name = "Comments")
     private String comments;
     @Column(name = "CheckIn")
     private Boolean checkIn;
@@ -85,18 +90,22 @@ public class Profile implements Serializable {
     private Boolean nametag;
     @Column(name = "Archive")
     private Boolean archive;
-    @Column(name = "PreferredLanguage", length = 50)
+    @Size(max = 50)
+    @Column(name = "PreferredLanguage")
     private String preferredLanguage;
     @Column(name = "FaithYear")
     private Integer faithYear;
     @Column(name = "Workshop")
     private Boolean workshop;
-    @Column(name = "Workshop1", length = 5)
+    @Size(max = 5)
+    @Column(name = "Workshop1")
     private String workshop1;
-    @Column(name = "Workshop2", length = 5)
+    @Size(max = 5)
+    @Column(name = "Workshop2")
     private String workshop2;
     @Basic(optional = false)
-    @Column(name = "LastModified", nullable = false)
+    @NotNull
+    @Column(name = "LastModified")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModified;
 
@@ -302,7 +311,7 @@ public class Profile implements Serializable {
 
     @Override
     public String toString() {
-        return "ws.cccm.model.Profile[ personID=" + personID + " ]";
+        return "com.cclife.registration.model.Profile[ personID=" + personID + " ]";
     }
     
 }

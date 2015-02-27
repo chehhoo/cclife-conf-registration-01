@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -20,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ephesus
  */
 @Entity
-@Table(name = "event_rooms", catalog = "cccmdb1", schema = "")
+@Table(name = "event_rooms")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "EventRooms.findAll", query = "SELECT e FROM EventRooms e"),
@@ -37,15 +39,20 @@ public class EventRooms implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "RoomID", nullable = false, length = 10)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "RoomID")
     private String roomID;
-    @Column(name = "EventID", length = 50)
+    @Size(max = 50)
+    @Column(name = "EventID")
     private String eventID;
-    @Column(name = "Description", length = 50)
+    @Size(max = 50)
+    @Column(name = "Description")
     private String description;
     @Column(name = "Capacity")
     private Integer capacity;
-    @Column(name = "Status", length = 1)
+    @Size(max = 1)
+    @Column(name = "Status")
     private String status;
     @Column(name = "SpaceLeft")
     private Integer spaceLeft;
@@ -53,7 +60,8 @@ public class EventRooms implements Serializable {
     private Integer keysCheckOut;
     @Column(name = "KeysCheckIn")
     private Integer keysCheckIn;
-    @Column(name = "Type", length = 50)
+    @Size(max = 50)
+    @Column(name = "Type")
     private String type;
 
     public EventRooms() {
@@ -157,7 +165,7 @@ public class EventRooms implements Serializable {
 
     @Override
     public String toString() {
-        return "ws.cccm.model.EventRooms[ roomID=" + roomID + " ]";
+        return "com.cclife.registration.model.EventRooms[ roomID=" + roomID + " ]";
     }
     
 }
